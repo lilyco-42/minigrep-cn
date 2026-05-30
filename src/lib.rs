@@ -12,12 +12,12 @@ impl 配置 {
         参数.next();
         let 查询 = match 参数.next() {
             Some(第二参数) => 第二参数,
-            None => return Err("Didn't get a query string"),
+            None => return Err("没找到字符串"),
         };
 
         let 文件 = match 参数.next() {
             Some(第三参数) => 第三参数,
-            None => return Err("Didn't get a file name"),
+            None => return Err("没找到文件"),
         };
 
         let 宽泛值 = env::var("CASE_INSENSITIVE").is_err();

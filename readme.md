@@ -14,3 +14,5 @@
 ```
 [minigrep资料](https://rustwiki.org/zh-CN/book/ch12-00-an-io-project.html)
 [迭代器优化for，clone](https://rustwiki.org/zh-CN/book/ch13-03-improving-our-io-project.html)
+# cargo run [查询字段] [文件]
+## CASE_INSENSITIVE的变量 有无控制宽泛搜索（大小写不敏感）/普通搜素
