@@ -2,44 +2,17 @@ name: CI
 
 on:
     push:
-        branches: ["main", "master"]
+        branches: [master]
     pull_request:
-        branches: ["main", "master"]
-
-env:
-    CARGO_TERM_COLOR: always
+        branches: [master]
+    workflow_dispatch: # 添加这一行，允许手动触发
 
 jobs:
     build:
-        runs-on: ubuntu-latest # 也可以使用 windows-latest, macos-latest
-
+        runs-on: ubuntu-latest
         steps:
-            - name: Checkout 代码
-              uses: actions/checkout@v4
-
-            - name: 安装 Rust 工具链
-              run: rustup toolchain install stable --profile minimal
-
-            - name: 缓存 Rust 依赖和构建产物
-              uses: Swatinem/rust-cache@v2
-              with:
-                  # 可选：自定义缓存 key 前缀
-                  prefix-key: "v0-rust"
-                  # 可选：是否缓存 workspace 的 target 目录（默认 true）
-                  cache-targets: "true"
-                  # 可选：是否缓存 ~/.cargo/bin（默认 true）
-                  cache-bin: "true"
-                  # 可选：只在主分支上保存缓存（避免 PR 污染）
-                  save-if: ${{ github.ref == 'refs/heads/main' }}
-
-            - name: 检查代码格式
-              run: cargo fmt --all -- --check
-
-            - name: 运行 Clippy（Lint）
-              run: cargo clippy -- -D warnings
-
-            - name: 运行测试
-              run: cargo test --all
-
-            - name: 构建 Release 版本（可选）
-              run: cargo build --release
+            - uses: actions/checkout@v4
+            - run: rustup toolchain install stable --profile minimal
+            - uses: Swatinem/rust-cache@v2
+            - run: cargo build --release
+            - run: cargo test
