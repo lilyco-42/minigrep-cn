@@ -1,5 +1,5 @@
 [package]
 name = "minigrep"
 version = "0.1.0"
-authors = "lilyco42"
+authors = ["lilyco-42"]
 edition = "2021"
